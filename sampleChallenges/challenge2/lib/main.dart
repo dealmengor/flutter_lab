@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Challenge 2',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.lightBlue,
       ),
       home: const MyHomePage(title: 'Challenge 2'),
     );
@@ -29,38 +29,40 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: const Icon(Icons.arrow_back),
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
+      body: Stack(
+        children: <Widget>[
+          _backGroundImage(),
+          _centralText(),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+    );
+  }
+
+  Widget _backGroundImage() {
+    return const Image(
+      image: AssetImage('assets/images/Panama.jpg'),
+      height: double.infinity,
+      width: double.infinity,
+      fit: BoxFit.cover,
+    );
+  }
+
+  Widget _centralText() {
+    return Center(
+      child: Container(
+        height: 100,
+        color: const Color.fromRGBO(0, 0, 0, 0.5),
+        child: const Center(
+          child: Text("This is Panama, it's more than just papers...",
+              style: TextStyle(fontSize: 30, color: Colors.white)),
+        ),
       ),
     );
   }
